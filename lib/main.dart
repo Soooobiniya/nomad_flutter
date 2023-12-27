@@ -12,19 +12,11 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  int count = 0;
+  List<int> numbers = [];
 
   void onAddClicked() {
     setState(() {
-      // State 클래스에게 데이터가 변경됐다고 알리는 함수
-      count++;
-    });
-  }
-
-  void onMinusClicked() {
-    setState(() {
-      // State 클래스에게 데이터가 변경됐다고 알리는 함수
-      count--;
+      numbers.add(numbers.length);
     });
   }
 
@@ -43,26 +35,11 @@ class _MyWidgetState extends State<MyWidget> {
                   fontSize: 30,
                 ),
               ),
-              Text(
-                '$count',
-                style: const TextStyle(
-                  fontSize: 30,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    iconSize: 40,
-                    onPressed: onMinusClicked,
-                    icon: const Icon(Icons.remove_circle_rounded),
-                  ),
-                  IconButton(
-                    iconSize: 40,
-                    onPressed: onAddClicked,
-                    icon: const Icon(Icons.add_circle_rounded),
-                  ),
-                ],
+              for (var n in numbers) Text('$n'),
+              IconButton(
+                iconSize: 40,
+                onPressed: onAddClicked,
+                icon: const Icon(Icons.add_circle_rounded),
               ),
             ],
           ),
