@@ -49,6 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void onResetPressed() {
+    // 전부 초기화
+    setState(() {
+      isRunning = false;
+      totalSeconds = twentyFiveMinutes;
+    });
+    timer.cancel();
+  }
+
   String format(int seconds) {
     var duration = Duration(seconds: seconds);
     var formattedTime = duration.toString().split(".").first.substring(2, 7);
@@ -76,15 +85,24 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Flexible(
             flex: 3,
-            child: Center(
-              child: IconButton(
-                icon: Icon(isRunning
-                    ? Icons.pause_circle_outline
-                    : Icons.play_circle_outline),
-                iconSize: 120,
-                color: Theme.of(context).cardColor,
-                onPressed: isRunning ? onPausePressed : onStartPressed,
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(isRunning
+                      ? Icons.pause_circle_outline
+                      : Icons.play_circle_outline),
+                  iconSize: 120,
+                  color: Theme.of(context).cardColor,
+                  onPressed: isRunning ? onPausePressed : onStartPressed,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.refresh),
+                  iconSize: 50,
+                  color: Theme.of(context).cardColor,
+                  onPressed: onResetPressed,
+                ),
+              ],
             ),
           ),
           Flexible(
