@@ -1,87 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:nomadcoder/screens/home_screen.dart';
 
 void main() {
-  runApp(const MyWidget());
+  runApp(const App());
 }
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
-
-  @override
-  State<MyWidget> createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends State<MyWidget> {
-  bool showTitle = true;
-
-  void toggleTitle() {
-    setState(() {
-      showTitle = !showTitle;
-    });
-  }
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(
+          backgroundColor: const Color(0xFFE7626C),
+        ),
         textTheme: const TextTheme(
-          titleLarge: TextStyle(
-            color: Colors.red,
+          displayLarge: TextStyle(
+            color: Color(0xFF232B55),
           ),
         ),
+        cardColor: const Color(0xFFF4EDDB),
       ),
-      home: Scaffold(
-        backgroundColor: const Color(0xFFF4EDDB),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              showTitle ? const MyLargeTitle() : const Text('Nothing'),
-              IconButton(
-                onPressed: toggleTitle,
-                icon: Icon(showTitle
-                    ? Icons.toggle_on_rounded
-                    : Icons.toggle_off_outlined),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MyLargeTitle extends StatefulWidget {
-  const MyLargeTitle({
-    super.key,
-  });
-
-  @override
-  State<MyLargeTitle> createState() => _MyLargeTitleState();
-}
-
-class _MyLargeTitleState extends State<MyLargeTitle> {
-  @override
-  void initState() {
-    super.initState();
-    print('initState!');
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    print('dispose!');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    print('build!');
-    return Text(
-      'My Large Title',
-      style: TextStyle(
-        fontSize: 30,
-        color: Theme.of(context).textTheme.titleLarge?.color,
-      ),
+      home: const HomeScreen(),
     );
   }
 }
